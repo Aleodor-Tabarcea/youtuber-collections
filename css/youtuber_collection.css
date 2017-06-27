@@ -1,0 +1,190 @@
+#appbar-guide-menu {
+    overflow-y: visible !important;
+}
+
+#collections {
+    position: fixed;
+    top: -400px;
+    left: -400px;
+    z-index: 9999999999;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+}
+
+.collection {
+    cursor: pointer;
+    height: 20px;
+}
+
+.liButton {
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    width: 12px;
+    height: 12px;
+    cursor:pointer;
+}
+
+.guide-item .display-name.no-count {
+    width: 110px !important;
+}
+
+li:hover .liButton{
+    background: no-repeat url(../images/message_white.png);
+    background-size: contain;
+}
+
+li:hover .liButton:hover{
+    background: no-repeat url(../images/message.png);
+    background-size: contain;
+    transform:  scale(1.2);
+}
+
+.guide-count{
+    right:17px !important;
+}
+
+.dom_collection_header {
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    padding: 2px 13px;
+    color: #333;
+    background: #fff;
+    padding-right: 20px;
+}
+
+.dom_collection_header.hover {
+    background: #444;
+    color: #fff
+}
+
+.collectionName {
+    pointer-events: none;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    max-width: 80%;
+    display: inline-block;
+    vertical-align: text-bottom;
+    line-height: 24px;
+}
+
+.dom_collection_body {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    width: 180px;
+    padding: 12px 6px;
+    overflow:auto;
+}
+
+.dom_collection_body_wrapper {
+    display: none;
+}
+
+.dom_collection_body_wrapper.visible {
+    display: block;
+    position: fixed;
+    left: 208px;
+    padding: 10px 6px;
+    padding-left: 20px !important;
+}
+
+.arrow {
+    pointer-events: none;
+    font-size: 18px;
+    line-height: 12px;
+    display: inline-block;
+    padding-left: 10px;
+    vertical-align: super;
+}
+
+.inputHolder:before {
+    content: "+";
+    position: absolute;
+    left: 17px;
+    top: 28px;
+    color: #888;
+}
+
+#newCollection {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2px 10px 2px 25px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 2px #eee;
+    line-height: 22px;
+    margin: 0px 0px 5px 11px;
+    width: 90%;
+}
+
+#newCollection:before {
+    content: "+";
+}
+
+.collectionRemoval {
+    line-height: 22px;
+    border: 1px solid red;
+    padding: 2px 6px;
+    margin: 0px 10px;
+    color: white;
+    position: absolute;
+    top: 22px;
+    width: 85%;
+    background: #cc181e;
+    display: none;
+}
+
+.collectionRemoval.visible {
+    display: block;
+}
+
+.collectionRemoval:before {
+    content: "-";
+    padding-right: 14px;
+    padding-left: 2px;
+}
+
+.collection_icon {
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    position: relative;
+    pointer-events: none;
+}
+
+.collection_icon:after {
+    content: " ";
+    position: absolute;
+    width: 10px;
+    height: 12px;
+    background: #878787;
+    top: 1px;
+}
+
+.collection_icon:before {
+    content: " ";
+    position: absolute;
+    width: 10px;
+    height: 13px;
+    background: #878787;
+    top: 3px;
+    left: 2px;
+    border: 1px solid #fff;
+    z-index: 2;
+}
+
+.dom_collection_header:hover .collection_icon:after,
+.dom_collection_header.hover .collection_icon:after {
+    background: #fff;
+}
+
+.dom_collection_header:hover .collection_icon:before,
+.dom_collection_header.hover .collection_icon:before {
+    background: #fff;
+    border: 1px solid #222;
+}
