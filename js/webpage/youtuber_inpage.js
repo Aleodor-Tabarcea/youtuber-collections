@@ -4,6 +4,15 @@ var YoutuberCollections = YoutuberCollections || {};
 /* Defined logger for this page */
 var Logger = ExtensionLogger.mainLogger;
 
+
+/* Define the type of interface the user is currently using */
+if(document.querySelector('[name="desktop_polymer/desktop_polymer"]') === null){
+    DomManipulation = OldVersionDomManipulation;
+}
+else{
+    DomManipulation = NewVersionDomManipulation;
+}
+
 /**
  *
  * Namespace used for main interaction with the extension
@@ -23,11 +32,12 @@ YoutuberCollections = function() {
 
     var initialize = function(firstTime) {
 
-        if(document.getElementById('guide-channels')){
+        
+        if(DomManipulation.determineInitializationType()){
             _dispatchEvent('localCommunication', 'syncCollections');            
         }
         else{
-            var menuButton = document.getElementById('appbar-guide-button');
+            var menuButton = DomManipulation.getMenuButton();
             menuButton.addEventListener('click', _lateInitialization);
         }
 
@@ -35,7 +45,7 @@ YoutuberCollections = function() {
     };
 
     var _lateInitialization = function(){
-        if(document.getElementById('guide-channels')){
+        if(DomManipulation.determineInitializationType()){
             YoutuberCollections.sendMessageToContentScript('syncCollections', null);
         }
         else{

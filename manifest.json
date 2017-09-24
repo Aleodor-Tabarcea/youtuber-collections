@@ -17,6 +17,7 @@
         "js/webpage/youtuber_logger.js",
         "js/webpage/youtuber_inpage.js",
         "js/webpage/youtuber_dom.js",
+        "js/webpage/youtuber_dom_v2.js",
         "images/message.png",
         "images/message_white.png"
     ],

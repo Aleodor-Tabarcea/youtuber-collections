@@ -4,7 +4,7 @@ ExtensionLogger = function() {
 
     var mainCSS = 'color: green;';
     var domCSS = 'color: orange;';
-    var enabled = false;
+    var enabled = true;
 
     /**
      *

@@ -187,7 +187,8 @@ var cssFiles = [
 var jsFiles = [
     'js/webpage/youtuber_inpage.js',
     'js/webpage/youtuber_logger.js',
-    'js/webpage/youtuber_dom.js'
+    'js/webpage/youtuber_dom.js',
+    'js/webpage/youtuber_dom_v2.js'
 ];
 ExtensionThread.domInitialize(cssFiles, jsFiles);
 ExtensionThread.listenersInitialize(true, true);

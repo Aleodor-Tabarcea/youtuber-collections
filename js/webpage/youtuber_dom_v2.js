@@ -1,5 +1,5 @@
 /* Make sure to keep the same instance of DomManipulation */
-var OldVersionDomManipulation = OldVersionDomManipulation || {};
+var NewVersionDomManipulation = NewVersionDomManipulation || {};
 
 /**
  *
@@ -7,7 +7,7 @@ var OldVersionDomManipulation = OldVersionDomManipulation || {};
  *
  */
 
-OldVersionDomManipulation = function() {
+NewVersionDomManipulation = function() {
 
     var _isInitialized = false;
 
@@ -19,6 +19,8 @@ OldVersionDomManipulation = function() {
      */
 
     initialSetup = function(data) {
+
+        ExtensionLogger.domLogger('Let\'s do this shit');
 
         if(!_isInitialized){
             _injectCollectionsControl();
@@ -39,7 +41,7 @@ OldVersionDomManipulation = function() {
      */
 
     var _injectCollectionsGenerator = function() {
-        var tempYoutubeSubscription = document.getElementById('guide-subscriptions-container');
+        var tempYoutubeSubscription = document.querySelector('h3.ytd-guide-subscriptions-section-renderer').parentElement;
 
         var tempHolder = document.createElement('div');
         tempHolder.className = 'inputHolder';
@@ -62,7 +64,7 @@ OldVersionDomManipulation = function() {
 
         tempHolder.appendChild(tempInput);
 
-        tempYoutubeSubscription.insertBefore(tempHolder, tempYoutubeSubscription.childNodes[0]);
+        tempYoutubeSubscription.insertBefore(tempHolder, document.querySelector('#sections #container'));
     };
 
     /**
@@ -77,7 +79,7 @@ OldVersionDomManipulation = function() {
         tempHolder.id = 'collectionRemoval';
         tempHolder.appendChild(document.createTextNode('Drop here to ungroup'));
 
-        var tempYoutubeSubscription = document.getElementById('guide-subscriptions-container');
+        var tempYoutubeSubscription = document.querySelector('#sections #container');
         var tempCollections = tempYoutubeSubscription.getElementsByClassName('dom_collection');
         tempYoutubeSubscription.insertBefore(tempHolder, tempCollections[0]);
     };
@@ -106,11 +108,12 @@ OldVersionDomManipulation = function() {
      */
 
     var _injectCollectionsControl = function() {
-        var channelHolder = document.getElementById('guide-channels');
-        var channels = channelHolder.getElementsByTagName('li');
+        var channelHolder = document.querySelector('#sections #container');
+        var channels = channelHolder.children;
         for (var i = 0; i < channels.length; i++) {
             var button = document.createElement('button');
-            var id = channels[i].getElementsByTagName('a')[0].getAttribute('data-external-id');
+            var id = channels[i].$.endpoint.data.browseEndpoint.browseId;
+            channels[i].setAttribute('data-external-id', id);
             button.setAttribute('data-external-id', id);
             button.className = 'liButton';
             button.addEventListener('click', _showDropdown);
@@ -219,6 +222,7 @@ OldVersionDomManipulation = function() {
      */
 
     var _moveItemToCollection = function(e) {
+        debugger;
         var item = '';
         var id = 0;
         var leavingId = undefined;
@@ -268,7 +272,7 @@ OldVersionDomManipulation = function() {
 
             var holder = _createCollectionHTML(i, data[i].name);
 
-            var youtubeSubscription = document.getElementById('guide-subscriptions-container');
+            var youtubeSubscription = document.querySelector('#sections #container');
             youtubeSubscription.insertBefore(holder, youtubeSubscription.childNodes[0]);
         }
         updateMyCollections(data);
@@ -285,7 +289,7 @@ OldVersionDomManipulation = function() {
 
         var holder = _createCollectionHTML(item.collectionId, item.collectionName);
 
-        var youtubeSubscription = document.getElementById('guide-subscriptions-container');
+        var youtubeSubscription = document.querySelector('#sections #container');
         var currentCollection = youtubeSubscription.getElementsByClassName('dom_collection');
         if (currentCollection.length) {
             youtubeSubscription.insertBefore(holder, currentCollection[currentCollection.length - 1].nextSibling);
@@ -410,7 +414,7 @@ OldVersionDomManipulation = function() {
         var collection = document.getElementById('dom_collection_' + collectionId);
         if (collection) {
             var lis = collection.getElementsByTagName('li');
-            var holder = document.getElementById('guide-subscriptions-container');
+            var holder = document.querySelector('#sections #container');
             while (lis.length) {
                 lis[0].getElementsByTagName('button')[0].removeAttribute('data-collection-id');
                 holder.appendChild(lis[0]);
@@ -613,11 +617,11 @@ OldVersionDomManipulation = function() {
     };
 
     var getMenuButton = function(){
-        return document.getElementById('appbar-guide-button');
+        return document.getElementById('guide-button');
     };
 
     var determineInitializationType = function(){
-        if(document.getElementById('guide-channels'))
+        if(document.querySelector('#sections #container'))
             return true;
 
         return false;
